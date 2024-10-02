@@ -8,6 +8,13 @@ public class InputHandler : MonoBehaviour
     private Dictionary<KeyCode, ICommand> commandMap = new Dictionary<KeyCode, ICommand>();
     private Dictionary<MouseButton, ICommand> mouseCommandMap = new Dictionary<MouseButton, ICommand>();
 
+    private Player player;  // Reference to the Player
+
+    public void Initialize(Player player)
+    {
+        this.player = player;  // Store reference to the player
+    }
+    
     public void SetCommand(KeyCode key,ICommand command)
     {
         commandMap[key] = command;
@@ -22,7 +29,7 @@ public class InputHandler : MonoBehaviour
     {
         foreach (var entry in commandMap)
         {
-            if (Input.GetKeyDown(entry.Key))
+            if (Input.GetKey(entry.Key))
             {
                 entry.Value.Execute();  // Voer het commando uit als de bijbehorende toets wordt ingedrukt
             }

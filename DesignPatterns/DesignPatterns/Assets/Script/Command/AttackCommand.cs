@@ -10,6 +10,8 @@ public class AttackCommand : ICommand
     {
         this.player = player;
     }
+    
+    
 
     public void Execute()
     {
