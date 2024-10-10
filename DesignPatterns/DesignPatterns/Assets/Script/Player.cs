@@ -8,21 +8,15 @@ public class Player : MonoBehaviour
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float rotationSpeed = 10f;  // Speed for smooth rotation
     [SerializeField] private float jumpForce = 7f;       // Force applied when jumping
-    [SerializeField] private LayerMask groundLayer;      // Layer to check if the player is grounded
     private Rigidbody rb;
     private Vector3 movementDirection;  // Direction vector for movement
-    private bool isGrounded;
-    [SerializeField] private Animator[] _animation;
+    [SerializeField]private bool isGrounded;
+    [SerializeField] private Animator _animation;
+    [SerializeField] private Animator shieldAni;
     
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-    }
-
-    void Update()
-    {
-        // Check if the player is grounded
-        GroundCheck();
     }
     
     public void Walk(Vector3 direction)
@@ -43,13 +37,10 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        Debug.Log("Player jumps!");
-        // Add jump logic
         if (isGrounded)  // Only jump if the player is grounded
         {
-            // Apply an upward force to the player
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;  // Prevent double jumping
+            isGrounded = false;
             Debug.Log("Player jumps!");
         }
     }
@@ -57,29 +48,21 @@ public class Player : MonoBehaviour
     public void Attack()
     {
         Debug.Log("Player attacks!");
-        // Add attack logic
-        _animation[0].SetTrigger("Slash");
+        _animation.SetTrigger("Slash");
     }
 
     public void Defend()
     {
         Debug.Log("Player defends!");
-        // Add defend logic
-        _animation[1].SetTrigger("Defend");
+        shieldAni.SetTrigger("Defend");
     }
     
-    private void GroundCheck()
+    void OnCollisionEnter(Collision other)
     {
-        // Perform a raycast downwards to check if the player is grounded
-        RaycastHit hit;
-        float rayDistance = 1.1f;  // Adjust based on the height of your player
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, rayDistance, groundLayer))
+        if (other.gameObject.tag == "Ground")
         {
-            isGrounded = true;  // Set the player as grounded if the ray hits the ground
-        }
-        else
-        {
-            isGrounded = false;  // Not grounded if no ground is detected
+            isGrounded = true;
         }
     }
+    
 }
