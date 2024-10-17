@@ -21,15 +21,14 @@ public class Player : MonoBehaviour
     
     public void Walk(Vector3 direction)
     {
-        if (direction.magnitude > 0)  // Check if there's any movement
+        if (direction.magnitude > 0) 
         {
-            // Normalize the direction to ensure consistent movement speed
+
             movementDirection = direction.normalized;
 
-            // Move the player using Rigidbody physics
             rb.MovePosition(rb.position + movementDirection * walkSpeed * Time.deltaTime);
 
-            // Rotate the player smoothly towards the movement direction
+  
             Quaternion targetRotation = Quaternion.LookRotation(movementDirection);
             rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.deltaTime));
         }
@@ -37,7 +36,7 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
-        if (isGrounded)  // Only jump if the player is grounded
+        if (isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isGrounded = false;

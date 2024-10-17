@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JumpCommand : ICommand
 {
-    private Player player;  // Receiver
+    private Player player;  
 
     public JumpCommand(Player player)
     {
@@ -13,6 +13,6 @@ public class JumpCommand : ICommand
 
     public void Execute()
     {
-        player.Jump();  // Player voert de sprong uit
+        player.Jump();  
     }
 }

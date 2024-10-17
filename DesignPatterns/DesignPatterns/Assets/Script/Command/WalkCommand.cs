@@ -5,7 +5,7 @@ using UnityEngine;
 public class WalkCommand : ICommand
 {
     private Player player;
-    private Vector3 direction;  // De richting waarin de speler moet lopen
+    private Vector3 direction; 
 
     public WalkCommand(Player player, Vector3 direction)
     {
@@ -15,6 +15,6 @@ public class WalkCommand : ICommand
 
     public void Execute()
     {
-        player.Walk(direction);  // Speler beweegt in de gegeven richting
+        player.Walk(direction);  
     }
 }

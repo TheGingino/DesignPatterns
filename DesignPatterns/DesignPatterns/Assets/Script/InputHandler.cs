@@ -8,11 +8,11 @@ public class InputHandler : MonoBehaviour
     private Dictionary<KeyCode, ICommand> commandMap = new Dictionary<KeyCode, ICommand>();
     private Dictionary<MouseButton, ICommand> mouseCommandMap = new Dictionary<MouseButton, ICommand>();
 
-    private Player player;  // Reference to the Player
+    private Player player;  
 
     public void Initialize(Player player)
     {
-        this.player = player;  // Store reference to the player
+        this.player = player;
     }
     
     public void SetCommand(KeyCode key,ICommand command)
@@ -31,12 +31,12 @@ public class InputHandler : MonoBehaviour
         {
             if (Input.GetKey(entry.Key))
             {
-                entry.Value.Execute();  // Voer het commando uit als de bijbehorende toets wordt ingedrukt
+                entry.Value.Execute(); 
             }
         }
         foreach (var entry in mouseCommandMap)
         {
-            if (Input.GetMouseButtonDown((int)entry.Key))  // MouseButton is casted to int for Input.GetMouseButtonDown
+            if (Input.GetMouseButtonDown((int)entry.Key))  
             {
                 entry.Value.Execute();
             }

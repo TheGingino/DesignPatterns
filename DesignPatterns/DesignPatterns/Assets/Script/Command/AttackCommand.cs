@@ -15,6 +15,6 @@ public class AttackCommand : ICommand
 
     public void Execute()
     {
-        player.Attack();  // Player voert de aanval uit
+        player.Attack(); 
     }
 }

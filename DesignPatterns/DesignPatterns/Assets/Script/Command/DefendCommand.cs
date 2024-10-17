@@ -13,6 +13,6 @@ public class DefendCommand : ICommand
 
     public void Execute()
     {
-        player.Defend();  // Player voert de verdediging uit
+        player.Defend(); 
     }
 }
