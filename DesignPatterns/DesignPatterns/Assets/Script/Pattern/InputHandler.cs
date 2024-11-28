@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class InputHandler : MonoBehaviour
+public partial class InputHandler : MonoBehaviour
 {
     private Dictionary<KeyCode, ICommand> commandMap = new Dictionary<KeyCode, ICommand>();
     private Dictionary<MouseButton, ICommand> mouseCommandMap = new Dictionary<MouseButton, ICommand>();

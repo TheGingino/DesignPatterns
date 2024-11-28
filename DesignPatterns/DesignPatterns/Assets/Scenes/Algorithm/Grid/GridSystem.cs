@@ -10,7 +10,7 @@ public class GridSystem : MonoBehaviour
     [SerializeField] private int width = 10;
     [SerializeField] private int height = 10;
     [SerializeField] private float cellSize = 10f;
-
+    
     private Tile[,] _grid;
 
     private void Awake()
@@ -23,6 +23,7 @@ public class GridSystem : MonoBehaviour
     /// </summary>
     private void CreateGrid()
     {
+
         _grid = new Tile[width, height];
 
         for (int x = 0; x < width; x++)
@@ -30,7 +31,11 @@ public class GridSystem : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 Vector3 worldPosition = new Vector3(x * cellSize, 0f, y * cellSize);
-                _grid[x, y] = new Tile(worldPosition, new Vector2Int(x, y));
+                var newTile = new Tile(worldPosition, new Vector2Int(x, y));
+                _grid[x, y] = newTile;
+
+                newTile.IsOccupied = x == 3;
+
             }
         }
     }
@@ -108,18 +113,19 @@ public class GridSystem : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-
+        if (_grid == null) return;
         
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                Gizmos.color = Color.red;
+                var currentTile = GetTile(x, y);
+                Gizmos.color =currentTile.IsOccupied ? Color.red : Color.cyan;
                 var point = new Vector3(x, y, 0) * cellSize;
-                Gizmos.DrawWireCube(transform.position, point);
-                
+                Gizmos.DrawWireCube(point, new Vector3(cellSize,cellSize,0));
             }
         }
-        
     }
+    
+    
 }
